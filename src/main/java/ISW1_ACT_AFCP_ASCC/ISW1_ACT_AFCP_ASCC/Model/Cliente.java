@@ -1,28 +1,30 @@
 package ISW1_ACT_AFCP_ASCC.ISW1_ACT_AFCP_ASCC.Model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "cliente")
+@Data
 public class Cliente {
+
     @Id
-    @Column(name = "cliente_id", nullable = false)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "cliente_id")
+    private Integer cliente_id;
 
     @Column(name = "nombre", length = 50)
     private String nombre;
 
-    @Column(name = "apellido", length = 50)
-    private String apellido;
+    @Column(name = "correo", length = 50)
+    private String correo;
 
-    @OneToMany(mappedBy = "cliente")
-    private Set<TarjetaUsuario> tarjetaUsuarios = new LinkedHashSet<>();
+    @Column(name = "telefono", length = 50)
+    private String telefono;
+
 
 }

@@ -6,8 +6,6 @@ import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.math.BigDecimal;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -15,8 +13,9 @@ import java.util.Set;
 @Table(name = "tarjetas_credito")
 public class TarjetasCredito {
     @Id
-    @Column(name = "tarjeta_id", nullable = false)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "tarjeta_id")
+    private Integer tarjeta_id;
 
     @Column(name = "numero", length = 16)
     private String numero;
@@ -37,11 +36,7 @@ public class TarjetasCredito {
     @Column(name = "cupo_disponible", precision = 10, scale = 2)
     private BigDecimal cupoDisponible;
 
-    @ColumnDefault("(`cupo_total` - `cupo_disponible`)")
     @Column(name = "cupo_utilizado", precision = 10, scale = 2)
     private BigDecimal cupoUtilizado;
-
-    @OneToMany(mappedBy = "tarjeta")
-    private Set<TarjetaUsuario> tarjetaUsuarios = new LinkedHashSet<>();
 
 }
